@@ -1,0 +1,13 @@
+package ru.learnup.springboot.ticketsalesapplication;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class TicketsalesApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
