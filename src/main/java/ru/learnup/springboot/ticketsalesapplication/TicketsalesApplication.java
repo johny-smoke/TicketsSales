@@ -1,11 +1,10 @@
 package ru.learnup.springboot.ticketsalesapplication;
 
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import ru.learnup.springboot.ticketsalesapplication.model.Event;
-import ru.learnup.springboot.ticketsalesapplication.services.EventService;
+import ru.learnup.springboot.ticketsalesapplication.model.Entertainment;
+import ru.learnup.springboot.ticketsalesapplication.services.EntertainmentService;
 
 @SpringBootApplication
 public class TicketsalesApplication {
@@ -13,11 +12,11 @@ public class TicketsalesApplication {
 	public static void main(String[] args) {
 		final ConfigurableApplicationContext ctx = SpringApplication.run(TicketsalesApplication.class, args);
 
-		EventService service = ctx.getBean(EventService.class);
+		EntertainmentService service = ctx.getBean(EntertainmentService.class);
 
-		service.addEvent(new Event("Дюна", "фантастика", "18+", 90));
-		service.addEvent(new Event("Metallica", "концерт по заявкам трудящихся", "21+", 50_000));
-		service.addEvent(new Event("Выставка грызунов", "выставка", "6+", 500));
+		service.addEvent(new Entertainment("Дюна", "фантастика", "18+", 90));
+		service.addEvent(new Entertainment("Metallica", "концерт по заявкам трудящихся", "21+", 50_000));
+		service.addEvent(new Entertainment("Выставка грызунов", "выставка", "6+", 500));
 		service.showAllEvents();
 		service.buyTicket("Дюна", 23);
 //		service.buyTicket("Дюна", -10);

@@ -1,13 +1,13 @@
 package ru.learnup.springboot.ticketsalesapplication.model;
 
-public class Event {
+public class Entertainment {
 
     private String name;
     private String desc;
     private String ageGroup;
     private Integer cntTickets;
 
-    public Event(String name, String desc, String ageGroup, Integer cntTickets) {
+    public Entertainment(String name, String desc, String ageGroup, Integer cntTickets) {
         this.name = name;
         this.desc = desc;
         this.ageGroup = ageGroup;

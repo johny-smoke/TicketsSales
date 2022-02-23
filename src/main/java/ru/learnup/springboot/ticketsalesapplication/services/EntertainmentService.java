@@ -1,19 +1,17 @@
 package ru.learnup.springboot.ticketsalesapplication.services;
 
 import org.springframework.stereotype.Service;
-import ru.learnup.springboot.ticketsalesapplication.model.Event;
+import ru.learnup.springboot.ticketsalesapplication.model.Entertainment;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
-public class EventService {
+public class EntertainmentService {
 
-    public Map<String, Event> events = new HashMap<>();
+    public Map<String, Entertainment> events = new HashMap<>();
 
-    public Event checkEvent(String name){
+    public Entertainment checkEvent(String name){
         if (!events.containsKey(name)) {
             throw new IllegalArgumentException("Премьеры с таким именем не существует");
         }
@@ -21,18 +19,18 @@ public class EventService {
             return events.get(name);
         }
     }
-    public void addEvent(Event premier){
+    public void addEvent(Entertainment premier){
         events.put(premier.getName(), premier);
     }
-    public Event getEvent(String name) {
+    public Entertainment getEvent(String name) {
         return checkEvent(name);
     }
-    public Map<String, Event> getAllEvents() {
+    public Map<String, Entertainment> getAllEvents() {
         return events;
     }
     public void showAllEvents() {
-        for (Map.Entry<String, Event> row : this.events.entrySet()) {
-            Event premier = row.getValue();
+        for (Map.Entry<String, Entertainment> row : this.events.entrySet()) {
+            Entertainment premier = row.getValue();
             System.out.println("Премьера " + premier.getName() +
                                ": " + premier.getDesc() +
                                " возрастная категория " + premier.getAgeGroup() +
@@ -44,7 +42,7 @@ public class EventService {
         events.remove(checkEvent(name).getName());
     }
     public void updEventName(String oldName, String newName){
-        Event premier = checkEvent(oldName);
+        Entertainment premier = checkEvent(oldName);
         premier.setName(newName);
         events.remove(oldName);
         addEvent(premier);
@@ -59,7 +57,7 @@ public class EventService {
         checkEvent(name).setCntTickets(newCntTickets);
     }
     public void buyTicket(String name, Integer cnt){
-        Event premier = checkEvent(name);
+        Entertainment premier = checkEvent(name);
         Integer nowTickets = premier.getCntTickets();
         if (cnt < 0) {
             throw new IllegalArgumentException( "Запрашиваемое количество билетов должно быть положительным." );
@@ -73,7 +71,7 @@ public class EventService {
         }
     }
     public void returnTicket(String name, Integer cnt){
-        Event premier = checkEvent(name);
+        Entertainment premier = checkEvent(name);
         if (cnt < 0) {
             throw new IllegalArgumentException("Запрашиваемое количество билетов должно быть положительным.");
         }
