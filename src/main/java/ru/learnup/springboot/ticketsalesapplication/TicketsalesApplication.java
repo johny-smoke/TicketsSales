@@ -14,16 +14,17 @@ public class TicketsalesApplication {
 
 		EntertainmentService service = ctx.getBean(EntertainmentService.class);
 
-		service.addEvent(new Entertainment("Дюна", "фантастика", "18+", 90));
-		service.addEvent(new Entertainment("Metallica", "концерт по заявкам трудящихся", "21+", 50_000));
-		service.addEvent(new Entertainment("Выставка грызунов", "выставка", "6+", 500));
-		service.showAllEvents();
+		service.addEntertainment(new Entertainment("Дюна", "фантастика", "18+", "01.01.2022", 90));
+		service.addEntertainment(new Entertainment("Metallica", "концерт по заявкам трудящихся", "21+", "15.07.2022", 50_000));
+		service.addEntertainment(new Entertainment("Выставка грызунов", "выставка", "6+", "10.04.2022", 500));
+		service.showAllEntertainments();
 		service.buyTicket("Дюна", 23);
 //		service.buyTicket("Дюна", -10);
 		service.buyTicket("Metallica", 5_000);
 		service.returnTicket("Metallica", 250);
 		service.buyTicket("Выставка грызунов", 75);
-		service.showAllEvents();
+		service.updEntertainmentData("Metallica", "15.08.2022");
+		service.showAllEntertainments();
 
 	}
 

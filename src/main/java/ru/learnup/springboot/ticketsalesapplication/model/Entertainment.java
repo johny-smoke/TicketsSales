@@ -5,12 +5,15 @@ public class Entertainment {
     private String name;
     private String desc;
     private String ageGroup;
+    private String data;
     private Integer cntTickets;
 
-    public Entertainment(String name, String desc, String ageGroup, Integer cntTickets) {
+
+    public Entertainment(String name, String desc, String ageGroup, String data, Integer cntTickets) {
         this.name = name;
         this.desc = desc;
         this.ageGroup = ageGroup;
+        this.data = data;
         this.cntTickets = cntTickets;
     }
     public String getName() {
@@ -30,6 +33,12 @@ public class Entertainment {
     }
     public void setAgeGroup(String ageGroup) {
         this.ageGroup = ageGroup;
+    }
+    public String getData() {
+        return data;
+    }
+    public void setData(String data) {
+        this.data = data;
     }
     public Integer getCntTickets() {
         return cntTickets;

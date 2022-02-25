@@ -1,15 +1,15 @@
 package ru.learnup.springboot.ticketsalesapplication.model;
 
 public class Ticket {
-    private String eventName;
+    private String entertainmentName;
 
-    public Ticket(String eventName) {
-        this.eventName = eventName;
+    public Ticket(String entertainmentName) {
+        this.entertainmentName = entertainmentName;
     }
-    public String getEventName() {
-        return eventName;
+    public String getEntertainmentName() {
+        return entertainmentName;
     }
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
+    public void setEntertainmentName(String entertainmentName) {
+        this.entertainmentName = entertainmentName;
     }
 }

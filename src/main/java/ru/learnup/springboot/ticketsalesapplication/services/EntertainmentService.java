@@ -1,6 +1,7 @@
 package ru.learnup.springboot.ticketsalesapplication.services;
 
 import org.springframework.stereotype.Service;
+import ru.learnup.springboot.ticketsalesapplication.annotations.Loggable;
 import ru.learnup.springboot.ticketsalesapplication.model.Entertainment;
 
 import java.util.HashMap;
@@ -9,27 +10,28 @@ import java.util.Map;
 @Service
 public class EntertainmentService {
 
-    public Map<String, Entertainment> events = new HashMap<>();
+    public Map<String, Entertainment> entertainments = new HashMap<>();
 
-    public Entertainment checkEvent(String name){
-        if (!events.containsKey(name)) {
+    public Entertainment checkEntertainment(String name){
+        if (!entertainments.containsKey(name)) {
             throw new IllegalArgumentException("Премьеры с таким именем не существует");
         }
         else {
-            return events.get(name);
+            return entertainments.get(name);
         }
     }
-    public void addEvent(Entertainment premier){
-        events.put(premier.getName(), premier);
+    @Loggable
+    public void addEntertainment(Entertainment premier){
+        entertainments.put(premier.getName(), premier);
     }
-    public Entertainment getEvent(String name) {
-        return checkEvent(name);
+    public Entertainment getEntertainment(String name) {
+        return checkEntertainment(name);
     }
-    public Map<String, Entertainment> getAllEvents() {
-        return events;
+    public Map<String, Entertainment> getAllEntertainments() {
+        return entertainments;
     }
-    public void showAllEvents() {
-        for (Map.Entry<String, Entertainment> row : this.events.entrySet()) {
+    public void showAllEntertainments() {
+        for (Map.Entry<String, Entertainment> row : this.entertainments.entrySet()) {
             Entertainment premier = row.getValue();
             System.out.println("Премьера " + premier.getName() +
                                ": " + premier.getDesc() +
@@ -38,26 +40,32 @@ public class EntertainmentService {
         }
     }
 
-    public void delEvent(String name){
-        events.remove(checkEvent(name).getName());
+    public void delEntertainment(String name){
+        entertainments.remove(checkEntertainment(name).getName());
     }
-    public void updEventName(String oldName, String newName){
-        Entertainment premier = checkEvent(oldName);
+    public void updEntertainmentName(String oldName, String newName){
+        Entertainment premier = checkEntertainment(oldName);
         premier.setName(newName);
-        events.remove(oldName);
-        addEvent(premier);
+        entertainments.remove(oldName);
+        addEntertainment(premier);
     }
-    public void updEventDesc(String name, String newDesc){
-        checkEvent(name).setDesc(newDesc);
+    public void updEntertainmentDesc(String name, String newDesc){
+        checkEntertainment(name).setDesc(newDesc);
     }
-    public void updEventAgeGroup(String name, String newAgeGroup){
-        checkEvent(name).setAgeGroup(newAgeGroup);
+    public void updEntertainmentAgeGroup(String name, String newAgeGroup){
+        checkEntertainment(name).setAgeGroup(newAgeGroup);
     }
-    public void updEventCntTickets(String name, Integer newCntTickets){
-        checkEvent(name).setCntTickets(newCntTickets);
+    @Loggable
+    public void updEntertainmentData(String name, String newData){
+        checkEntertainment(name).setData(newData);
     }
+    public void updEntertainmentCntTickets(String name, Integer newCntTickets){
+        checkEntertainment(name).setCntTickets(newCntTickets);
+    }
+
+    @Loggable
     public void buyTicket(String name, Integer cnt){
-        Entertainment premier = checkEvent(name);
+        Entertainment premier = checkEntertainment(name);
         Integer nowTickets = premier.getCntTickets();
         if (cnt < 0) {
             throw new IllegalArgumentException( "Запрашиваемое количество билетов должно быть положительным." );
@@ -71,7 +79,7 @@ public class EntertainmentService {
         }
     }
     public void returnTicket(String name, Integer cnt){
-        Entertainment premier = checkEvent(name);
+        Entertainment premier = checkEntertainment(name);
         if (cnt < 0) {
             throw new IllegalArgumentException("Запрашиваемое количество билетов должно быть положительным.");
         }
