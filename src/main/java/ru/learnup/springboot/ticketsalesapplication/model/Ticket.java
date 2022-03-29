@@ -1,15 +1,18 @@
 package ru.learnup.springboot.ticketsalesapplication.model;
 
-public class Ticket {
-    private String entertainmentName;
+import lombok.Data;
+import java.time.LocalDateTime;
 
-    public Ticket(String entertainmentName) {
-        this.entertainmentName = entertainmentName;
-    }
-    public String getEntertainmentName() {
-        return entertainmentName;
-    }
-    public void setEntertainmentName(String entertainmentName) {
-        this.entertainmentName = entertainmentName;
+@Data
+public class Ticket {
+    private LocalDateTime data;
+    private Integer cntTickets;
+    private Entertainment entertainment;
+
+    public Ticket(Integer cntTickets, LocalDateTime data, Entertainment entertainment)
+    {
+        this.data = data;
+        this.cntTickets = cntTickets;
+        this.entertainment = entertainment;
     }
 }

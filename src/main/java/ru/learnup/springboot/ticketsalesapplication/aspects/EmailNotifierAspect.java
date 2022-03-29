@@ -3,7 +3,6 @@ package ru.learnup.springboot.ticketsalesapplication.aspects;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
-import ru.learnup.springboot.ticketsalesapplication.services.EntertainmentService;
 
 @Component
 @Aspect
