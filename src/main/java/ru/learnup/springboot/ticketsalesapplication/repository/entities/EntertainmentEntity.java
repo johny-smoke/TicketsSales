@@ -3,7 +3,6 @@ package ru.learnup.springboot.ticketsalesapplication.repository.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.learnup.springboot.ticketsalesapplication.model.Ticket;
 
 import javax.persistence.*;
 import java.util.List;
@@ -32,15 +31,21 @@ public class EntertainmentEntity {
     @OneToMany (mappedBy = "entertainment", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<TicketEntity> ticketList;
 
-    public void AddTicket(Ticket ticket){
-        this.ticketList.add(new TicketEntity(null, ticket.getData(), ticket.getCntTickets(), null));
+    public void AddTicket(TicketEntity ticketEntity){
+        this.ticketList.add(ticketEntity);
+        ticketEntity.setEntertainment(this);
+    }
+
+    public void deleteTicket(TicketEntity ticketEntity) {
+        this.ticketList.remove(ticketEntity);
+        ticketEntity.setEntertainment(null);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder(String.format("(%d) %s %s возрасная группа %s \n", id, name, descr, ageGroup));
         for (TicketEntity tickets : ticketList) {
-            sb.append("на дату ").append(tickets.getData()).append(" билетов ").append("\n");
+            sb.append("на дату ").append(tickets.getData()).append(" билетов ").append(tickets.getCntTickets()).append("\n");
         }
         return sb.toString();
     }

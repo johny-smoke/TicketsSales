@@ -1,7 +1,9 @@
 package ru.learnup.springboot.ticketsalesapplication.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.learnup.springboot.ticketsalesapplication.model.Entertainment;
 import ru.learnup.springboot.ticketsalesapplication.model.Ticket;
 import ru.learnup.springboot.ticketsalesapplication.repository.entities.EntertainmentEntity;
@@ -10,18 +12,26 @@ import ru.learnup.springboot.ticketsalesapplication.repository.interfaces.Entert
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EntertainmentService {
-    private EntertainmentRepository repository;
+    private final EntertainmentRepository repository;
 
     @Autowired
     public EntertainmentService(EntertainmentRepository repository){
         this.repository = repository;
     }
+
     public void showAllEntertainments(){
         System.out.println(repository.findAll());
     }
+    public void showEntertainmentByName(String name) { System.out.println(repository.getByName(name)); }
+
+    public EntertainmentEntity getByName(String name) {
+        return repository.getByName(name);
+    }
+
     public void delEntertainment(Integer entertainmentId){
         repository.deleteById(entertainmentId);
     }
@@ -38,4 +48,25 @@ public class EntertainmentService {
         }
         repository.save(entertainmentEntity);
     }
+
+    @Transactional
+    public void UpdateEntertainmentName(String entertainmentName, String newName) {
+
+        EntertainmentEntity entertainmentEntity = repository.getByName(entertainmentName);
+        Optional<EntertainmentEntity> optionalEntertainmentEntity = Optional.ofNullable(entertainmentEntity);
+        if (optionalEntertainmentEntity.isPresent()){
+            try {
+                final EntertainmentEntity forUpdate = repository.getForUpdate(entertainmentEntity.getId());
+                System.out.println("Объект получен");
+                forUpdate.setName(newName);
+                repository.save(forUpdate);
+                System.out.println("Объект записан");
+            } catch (DataAccessException err) {
+                System.out.println("Объект уже был изменен!" + err.getMessage());
+            }
+        } else {
+            System.out.println("Мероприятия " + entertainmentName + "не существует");
+        }
+    }
+
 }

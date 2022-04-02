@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -19,18 +19,10 @@ public class TicketEntity {
     private Integer id;
 
     @Column(name = "data", nullable = false)
-    private LocalDateTime data;
+    private LocalDate data;
 
     @Column(name = "cnt")
     private Integer cntTickets;
-
-    /*
-    public TicketEntity(LocalDateTime data, Integer cntTickets){
-        this.data = data;
-        this.cntTickets = cntTickets;
-    }
-    (cascade = CascadeType.ALL)
-     */
 
     @ManyToOne
     @JoinColumn(name = "ent_id")
@@ -38,6 +30,6 @@ public class TicketEntity {
 
     @Override
     public String toString() {
-        return String.format("(%d) %s билетов %d", id, entertainment.getName(), cntTickets);
+        return String.format("(%d) %s на дату %s билетов %d", id, entertainment.getName(), data, cntTickets);
     }
 }

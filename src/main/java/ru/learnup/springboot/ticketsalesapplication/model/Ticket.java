@@ -1,15 +1,15 @@
 package ru.learnup.springboot.ticketsalesapplication.model;
 
 import lombok.Data;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 public class Ticket {
-    private LocalDateTime data;
+    private LocalDate data;
     private Integer cntTickets;
     private Entertainment entertainment;
 
-    public Ticket(Integer cntTickets, LocalDateTime data, Entertainment entertainment)
+    public Ticket(LocalDate data, Integer cntTickets, Entertainment entertainment)
     {
         this.data = data;
         this.cntTickets = cntTickets;
