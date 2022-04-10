@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.learnup.springboot.ticketsalesapplication.model.Entertainment;
-import ru.learnup.springboot.ticketsalesapplication.model.Ticket;
 import ru.learnup.springboot.ticketsalesapplication.repository.entities.EntertainmentEntity;
-import ru.learnup.springboot.ticketsalesapplication.repository.entities.TicketEntity;
 import ru.learnup.springboot.ticketsalesapplication.repository.interfaces.EntertainmentRepository;
 
 import java.util.ArrayList;

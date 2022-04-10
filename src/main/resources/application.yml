@@ -8,4 +8,8 @@ spring:
     show-sql: true
 logging:
   level:
-    org.springframework.web: debug
+    org:
+      springframework:
+        web: debug
+        security: debug
+        transaction: debug

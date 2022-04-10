@@ -15,7 +15,7 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 @RestController
-@RequestMapping("/api/v1/entertainments")
+@RequestMapping("/entertainments")
 public class EntertainmentController {
 
     private EntertainmentService entertainmentService;
