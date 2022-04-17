@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.learnup.springboot.ticketsalesapplication.controllers.dto.EntertainmentDto;
 import ru.learnup.springboot.ticketsalesapplication.mappers.MyMapper;
 import ru.learnup.springboot.ticketsalesapplication.model.Entertainment;
-import ru.learnup.springboot.ticketsalesapplication.model.Ticket;
 import ru.learnup.springboot.ticketsalesapplication.services.EntertainmentService;
 import ru.learnup.springboot.ticketsalesapplication.services.TicketService;
 
@@ -18,9 +17,9 @@ import static java.util.stream.Collectors.toList;
 @RequestMapping("/entertainments")
 public class EntertainmentController {
 
-    private EntertainmentService entertainmentService;
-    private TicketService ticketService;
-    private MyMapper mapper;
+    private final EntertainmentService entertainmentService;
+    private final TicketService ticketService;
+    private final MyMapper mapper;
 
     @Autowired
     public EntertainmentController(EntertainmentService entertainmentService, TicketService ticketService, MyMapper mapper) {
@@ -39,13 +38,7 @@ public class EntertainmentController {
 
     @GetMapping("/{id}")
     public EntertainmentDto get(@PathVariable("id") Integer id) {
-        Entertainment entertainment = entertainmentService.get(id);
-        List<Ticket> ticketList = ticketService.getAllByEntertainment(entertainment);
-//        entertainment.s
-
-        final EntertainmentDto result = mapper.toDto(entertainment);
-
-        return result;
+        return mapper.toDto(entertainmentService.get(id));
     }
 
     @PostMapping

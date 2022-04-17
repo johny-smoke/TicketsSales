@@ -15,6 +15,8 @@ public interface TicketRepository extends JpaRepository<TicketEntity, Integer> {
 
     List<TicketEntity> findAllByEntertainmentId(Integer id);
 
+    TicketEntity findAllById (Integer id);
+
     @Query(value = "from TicketEntity e where e.entertainment.name = :name")
     List<TicketEntity> findAllByNameLikeOrderById(String name);
 
